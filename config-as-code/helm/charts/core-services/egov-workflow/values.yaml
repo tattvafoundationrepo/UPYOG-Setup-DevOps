@@ -18,6 +18,7 @@ replicas: "1"
 appType: "java-spring"
 tracing-enabled: true
 heap: "-Xmx384m -Xms256m"
+memory_limits: 512Mi
 
 # Additional Container Envs
 env: |

@@ -32,7 +32,7 @@ heap: "-Xmx384m -Xms256m"
 file-storage-mount-path: "/filestore"
 is-nfs-enabled: false
 is-s3-enabled: true
-
+memory_limits: 512Mi
 persistence:
   enabled: false
 
@@ -49,7 +49,9 @@ env: |
   - name: TEMP_FOLDER_PATH
     value: "/tmp"
   - name: SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE
-    value: "6MB"
+    value: "10MB"
+  - name: maxHttpHeaderSize
+    value: "128000"    
   - name: ISNFSSTORAGEENABLED
     value: {{ index .Values "is-nfs-enabled" | quote }}
   {{- if index .Values "is-nfs-enabled" }}
@@ -112,5 +114,4 @@ env: |
   {{- if index .Values "filestore-url-validity" }}   
   - name: PRESIGNED_URL_EXPIRY_TIME_IN_SECS     
     value: {{ index .Values "filestore-url-validity" | quote }}   
-  {{- end }}  
-
+  {{- end }} 
