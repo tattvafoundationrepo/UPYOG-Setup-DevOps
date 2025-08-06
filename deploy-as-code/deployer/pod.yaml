@@ -1,0 +1,404 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    deployment-timestamp: "20241015153152"
+  creationTimestamp: "2024-10-15T10:01:53Z"
+  generateName: billing-service-5d6f558446-
+  labels:
+    app: billing-service
+    group: billingservices
+    pod-template-hash: 5d6f558446
+  name: billing-service-5d6f558446-jl5w4
+  namespace: egov
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: billing-service-5d6f558446
+    uid: 52758f08-ce5e-4a6b-8fa4-2fd8676c23bc
+  resourceVersion: "23774694"
+  uid: d2af9262-4874-4e15-8691-5689006a8410
+spec:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: billing-service
+              group: billingservices
+          topologyKey: failure-domain.beta.kubernetes.io/zone
+        weight: 100
+  containers:
+  - env:
+    - name: SERVER_PORT
+      value: "8080"
+    - name: JAVA_OPTS
+      value: -Xmx384m -Xms256m
+    - name: USER_SERVICE_HOSTNAME
+      valueFrom:
+        configMapKeyRef:
+          key: egov-user
+          name: egov-service-host
+    - name: EGOV_MDMS_HOST
+      valueFrom:
+        configMapKeyRef:
+          key: egov-mdms-service
+          name: egov-service-host
+    - name: EGOV_APPORTION_HOST
+      valueFrom:
+        configMapKeyRef:
+          key: egov-apportion-service
+          name: egov-service-host
+    - name: SPRING_KAFKA_CONSUMER_GROUP_ID
+      value: bs-persist
+    - name: SPRING_KAFKA_PRODUCER_KEY_SERIALIZER
+      value: org.apache.kafka.common.serialization.StringSerializer
+    - name: SPRING_KAFKA_PRODUCER_VALUE_SERIALIZER
+      value: org.springframework.kafka.support.serializer.JsonSerializer
+    - name: KAFKA_TOPICS_RECEIVINGCENTER_CREATE_NAME
+      value: egov.pgr.receiving-centertype-create
+    - name: KAFKA_TOPICS_SAVE_BILL
+      value: save-bill-db
+    - name: KAFKA_TOPICS_UPDATE_BILL
+      value: update-bill-db
+    - name: KAFKA_TOPICS_SAVE_BILL_KEY
+      value: save-bill
+    - name: KAFKA_TOPICS_UPDATE_BILL_KEY
+      value: update-bill
+    - name: KAFKA_TOPICS_SAVE_DEMAND
+      value: save-demand
+    - name: KAFKA_TOPICS_UPDATE_DEMAND
+      value: update-demand
+    - name: KAFKA_TOPICS_SAVE_TAXHEADMASTER
+      value: save-taxHeadMaster-db
+    - name: KAFKA_TOPICS_SAVE_TAXHEADMASTER_KEY
+      value: save-taxHeadMaster
+    - name: KAFKA_TOPICS_UPDATE_TAXHEADMASTER
+      value: update-taxHeadMaster-db
+    - name: KAFKA_TOPICS_UPDATE_TAXHEADMASTER_KEY
+      value: update-taxHeadMaster
+    - name: KAFKA_CONSUMER_CONFIG_GROUP_ID
+      value: bs-masters-group
+    - name: BS_BILL_SEQ_NAME
+      value: seq_egbs_bill
+    - name: BS_BILLDETAIL_SEQ_NAME
+      value: seq_egbs_billdetail
+    - name: BS_BILLDETAIL_BILLNUMBER_SEQ_NAME
+      value: seq_egbs_billnumber
+    - name: BS_BILLACCOUNTDETAIL_SEQ_NAME
+      value: seq_egbs_billaccountdetail
+    - name: BS_DEMAND_SEQ_NAME
+      value: seq_egbs_demand
+    - name: BS_DEMANDDETAIL_SEQ_NAME
+      value: seq_egbs_demanddetail
+    - name: SERVER_CONTEXT_PATH
+      value: /billing-service
+    - name: KAFKA_TOPICS_RECEIPT_UPDATE_DEMAND
+      value: egov.collection.receipt-create
+    - name: KAFKA_TOPICS_SAVE_GLCODEMASTER
+      value: save-glCodeMaster-db
+    - name: KAFKA_TOPICS_SAVE_GLCODEMASTER_KEY
+      value: save-glCodeMaster
+    - name: KAFKA_TOPICS_UPDATE_GLCODEMASTER
+      value: update-glCodeMaster-db
+    - name: KAFKA_TOPICS_UPDATE_GLCODEMASTER_KEY
+      value: update-glCodeMaster
+    - name: KAFKA_TOPICS_CREATE_TAXPERIOD_NAME
+      value: save-taxperiod-db
+    - name: KAFKA_TOPICS_CREATE_TAXPERIOD_KEY
+      value: save-taxperiod
+    - name: KAFKA_TOPICS_UPDATE_TAXPERIOD_NAME
+      value: update-taxperiod-db
+    - name: KAFKA_TOPICS_UPDATE_TAXPERIOD_KEY
+      value: update-taxperiod
+    - name: KAFKA_TOPICS_CREATE_BUSINESSSERVICEDETAIL_NAME
+      value: save-businessservicedetail-db
+    - name: KAFKA_TOPICS_CREATE_BUSINESSSERVICEDETAIL_KEY
+      value: save-businessservicedetail
+    - name: KAFKA_TOPICS_UPDATE_BUSINESSSERVICEDETAIL_NAME
+      value: update-businessservicedetail-db
+    - name: KAFKA_TOPICS_UPDATE_BUSINESSSERVICEDETAIL_KEY
+      value: update-businessservicedetail
+    - name: BS_TAXHEAD_SEQ_NAME
+      value: seq_egbs_taxheadmaster
+    - name: BS_TAXHEAD_CODE_SEQ_NAME
+      value: seq_egbs_taxheadmastercode
+    - name: BS_GLCODEHEAD_SEQ_NAME
+      value: seq_egbs_glcodemaster
+    - name: BS_TAXPERIOD_SEQ_NAME
+      value: seq_egbs_taxperiod
+    - name: BS_BUSINESSSERVICEDETAIL_SEQ_NAME
+      value: seq_egbs_business_srvc_details
+    - name: JAVA_ARGS
+      value: -Dspring.profiles.active=monitoring
+    - name: SECURITY_BASIC_ENABLED
+      value: "false"
+    - name: MANAGEMENT_SECURITY_ENABLED
+      value: "false"
+    - name: TRACER_OPENTRACING_ENABLED
+      value: "true"
+    - name: SPRING_DATASOURCE_URL
+      valueFrom:
+        configMapKeyRef:
+          key: db-url
+          name: egov-config
+    - name: FLYWAY_ENABLED
+      value: "false"
+    - name: SPRING_FLYWAY_ENABLED
+      value: "false"
+    - name: MANAGEMENT_ENDPOINTS_WEB_BASE_PATH
+      value: /
+    - name: APP_TIMEZONE
+      valueFrom:
+        configMapKeyRef:
+          key: timezone
+          name: egov-config
+    - name: FLYWAY_URL
+      valueFrom:
+        configMapKeyRef:
+          key: db-url
+          name: egov-config
+    - name: SPRING_DATASOURCE_USERNAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: db
+    - name: SPRING_DATASOURCE_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: db
+    - name: SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE
+      valueFrom:
+        configMapKeyRef:
+          key: spring-datasource-tomcat-initialSize
+          name: egov-config
+    - name: SERVER_TOMCAT_MAX_THREADS
+      valueFrom:
+        configMapKeyRef:
+          key: server-tomcat-max-threads
+          name: egov-config
+    - name: SERVER_TOMCAT_MAX_CONNECTIONS
+      valueFrom:
+        configMapKeyRef:
+          key: server-tomcat-max-connections
+          name: egov-config
+    - name: SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE
+      valueFrom:
+        configMapKeyRef:
+          key: spring-datasource-tomcat-max-active
+          name: egov-config
+    - name: SPRING_DATASOURCE_HIKARI_MAXIMUM-POOL-SIZE
+      valueFrom:
+        configMapKeyRef:
+          key: spring-datasource-tomcat-max-active
+          name: egov-config
+    - name: KAFKA_CONFIG_BOOTSTRAP_SERVER_CONFIG
+      valueFrom:
+        configMapKeyRef:
+          key: kafka-brokers
+          name: egov-config
+    - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+      valueFrom:
+        configMapKeyRef:
+          key: kafka-brokers
+          name: egov-config
+    - name: SPRING_JPA_SHOW_SQL
+      valueFrom:
+        configMapKeyRef:
+          key: spring-jpa-show-sql
+          name: egov-config
+    - name: JAEGER_SERVICE_NAME
+      value: billing-service
+    - name: JAEGER_SAMPLER_TYPE
+      value: remote
+    - name: JAEGER_AGENT_HOST
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.hostIP
+    - name: JAEGER_AGENT_PORT
+      value: "6831"
+    - name: JAEGER_SAMPLER_MANAGER_HOST_PORT
+      value: $(JAEGER_AGENT_HOST):5778
+    - name: TRACER_OPENTRACING_ENABLED
+      value: "true"
+    image: egovio/billing-service:v1.3.4-72f8a8f87b-39
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - sh
+          - -c
+          - sleep 10
+    livenessProbe:
+      failureThreshold: 5
+      httpGet:
+        path: /billing-service/health
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 3
+    name: billing-service
+    ports:
+    - containerPort: 8080
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 5
+      httpGet:
+        path: /billing-service/health
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 3
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        memory: 512Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-sr2ch
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  initContainers:
+  - env:
+    - name: DB_URL
+      valueFrom:
+        configMapKeyRef:
+          key: db-url
+          name: egov-config
+    - name: SCHEMA_TABLE
+      value: billing_service_schema
+    - name: FLYWAY_USER
+      valueFrom:
+        secretKeyRef:
+          key: flyway-username
+          name: db
+    - name: FLYWAY_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: flyway-password
+          name: db
+    - name: FLYWAY_LOCATIONS
+      valueFrom:
+        configMapKeyRef:
+          key: flyway-locations
+          name: egov-config
+    image: egovio/billing-service-db:v1.3.4-72f8a8f87b-39
+    imagePullPolicy: IfNotPresent
+    name: db-migration
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-sr2ch
+      readOnly: true
+  nodeName: ip-192-168-79-183.ap-south-1.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-sr2ch
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-10-15T10:02:01Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-10-16T07:59:25Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-10-16T07:59:25Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-10-15T10:01:53Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://d3245c25437ccdf7b99630526277f84523f584187c7e967266f82046b6c9f871
+    image: docker.io/egovio/billing-service:v1.3.4-72f8a8f87b-39
+    imageID: docker.io/egovio/billing-service@sha256:9718939199027230f37ce2ecdbd7634fcaee7c084321b170e6a873e43e38bdb4
+    lastState:
+      terminated:
+        containerID: containerd://32062fb92d75d09a78315dcdf18f49aa3817b9b41d2de8a5e8212342651a39d5
+        exitCode: 137
+        finishedAt: "2024-10-16T07:58:29Z"
+        reason: OOMKilled
+        startedAt: "2024-10-16T07:51:56Z"
+    name: billing-service
+    ready: true
+    restartCount: 6
+    started: true
+    state:
+      running:
+        startedAt: "2024-10-16T07:58:44Z"
+  hostIP: 192.168.79.183
+  initContainerStatuses:
+  - containerID: containerd://500841337920c28e4d43931956b84f87cc9c59c52d316403f9a877113b776689
+    image: docker.io/egovio/billing-service-db:v1.3.4-72f8a8f87b-39
+    imageID: docker.io/egovio/billing-service-db@sha256:4417cff0853c5b9b3f1b78c45dc9389311e3bf757ac9d9a32b1203b456746458
+    lastState: {}
+    name: db-migration
+    ready: true
+    restartCount: 0
+    state:
+      terminated:
+        containerID: containerd://500841337920c28e4d43931956b84f87cc9c59c52d316403f9a877113b776689
+        exitCode: 0
+        finishedAt: "2024-10-15T10:02:00Z"
+        reason: Completed
+        startedAt: "2024-10-15T10:01:57Z"
+  phase: Running
+  podIP: 192.168.70.181
+  podIPs:
+  - ip: 192.168.70.181
+  qosClass: Burstable
+  startTime: "2024-10-15T10:01:53Z"

@@ -1,26 +1,26 @@
 # Replace with the name which you want to give to your EKS cluster
 # Cluster name can have only lowercase alphanumeric characters and hyphens
 # For example: "upyog-demo"
-cluster_name: "demo"
+cluster_name: "gambia"
 
 # Replace with ssh key name you want
-ssh_key_name: "demo-ssh-key" 
+ssh_key_name: "faizan" 
 
 # Replace with public key which you want to add in your EC2 machines # ssh key which you want to add in your EC2 machines
-public_ssh_key: "ssh-rsa zxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxyzxy"
+public_ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFIlJLzOK/C2d90vNJ3BIn6DXvT8VIgHA92x5wPgoeEt5mmBmMsIgjrLm0bZAFe0oHC+eQq6pZwiDqeiqQ7U4GG2pLZrTcECoWOLnoTEkK8z5aEgizwSczk/mgROML2EhxROlZljQ49mwXtrMIIhmkZazX9EocNY0bo0iP3FeuQK8IgJ4zaBNvAV59ZCg5N0EqSIAgWvAbRZsNmxMAYajxGEa9xbH73ioGkab+uEZzSGF2hl5mp7GChc91Q/OwJsuthb7eGiORvrCSuB2dSfn1MkTIAMg7sI7pFRghgbwiKu2wwHjOYDgZ//6csNycxT3CJFbX5mZIWqDDP2K4edre7OB/VGb0xw9j2ZjuCHMTGDelVKbYdzUzm0WtcU23POoJ+Sm6/mjIwuA/wUwAVZOZ8JDfTlIquCyo9BH/M1jfCBm7GvasPxzSJbMX4KiNqfEIzWfQl8G7ieYxjSjbbo2KbfD2dKeMZF7iaqpooe6Tx042FyX7k45fBq7ewGecOhjnmH86rRh+7cDnuHgLf0cZsYgwuHLAfLyPfiUrXdAECWnxAAyBCAPYQsfrWhO/czMF7rQRPP7sKW0j2VIWDx0weOrZjXmHKTv/X/JUvpbSgbm3z9hvvSEUuSqf3+MnXdQ8znb8BXwPv+RuNt3v+yyXIIyLcsVzPO7W4nLo9bMh8w=="
 
 # Name you want to give to your Database
 # DB name must contain only alphanumeric characters
-db_name: "demo"
+db_name: "gambia"
 
 # Replace with DB username you want
 # DB user name must contain only alphanumeric characters
-db_username: "demo" 
+db_username: "gambia" 
 
 # Replace with Domain name you want for your web applications
-domain_name: "demo.upyog.org"
+domain_name: "gambia.tattvafoundation.org"
 
 # Replace with the name you want to give to your S3 bucket which is used to store the terraform state
-terraform_state_bucket_name: "upyog-terraform"
+terraform_state_bucket_name: "gambia-terraform"
 
 

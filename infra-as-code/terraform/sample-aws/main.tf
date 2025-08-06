@@ -1,10 +1,10 @@
 terraform {
   backend "s3" {
-    bucket = <terraform_state_bucket_name>
+    bucket = "gambia-terraform"
     key    = "digit-bootcamp-setup/terraform.tfstate"
     region = "ap-south-1"
     # The below line is optional depending on whether you are using DynamoDB for state locking and consistency
-    dynamodb_table = <terraform_state_bucket_name>
+    dynamodb_table = "gambia-terraform"
     # The below line is optional if your S3 bucket is encrypted
     encrypt = true
   }
@@ -24,7 +24,7 @@ module "db" {
   vpc_security_group_ids        = ["${module.network.rds_db_sg_id}"]
   availability_zone             = "${element(var.availability_zones, 0)}"
   instance_class                = "db.t3.medium"  ## postgres db instance type
-  engine_version                = "11.22"   ## postgres version
+  engine_version                = "13.15"   ## postgres version
   storage_type                  = "gp2"
   storage_gb                    = "10"     ## postgres disk size
   backup_retention_days         = "7"

@@ -5,7 +5,7 @@
 
 variable "cluster_name" {
   description = "Name of the Kubernetes cluster"
-  default = <cluster_name> #REPLACE
+  default = "gambia" #REPLACE
 }
 
 variable "vpc_cidr_block" {
@@ -26,7 +26,7 @@ variable "availability_zones" {
 
 variable "kubernetes_version" {
   description = "kubernetes version"
-  default = "1.27"
+  default = "1.29"
 }
 
 variable "instance_type" {
@@ -42,30 +42,30 @@ variable "override_instance_types" {
 
 variable "number_of_worker_nodes" {
   description = "eGov recommended below worker node counts as default"
-  default = "4" #REPLACE IF NEEDED
+  default = "3" #REPLACE IF NEEDED
 }
 
 variable "ssh_key_name" {
   description = "ssh key name, not required if your using spot instance types"
-  default = <ssh_key_name> #REPLACE
+  default = "faizan" #REPLACE
 }
 
 
 variable "db_name" {
   description = "RDS DB name. Make sure there are no hyphens or other special characters in the DB name. Else, DB creation will fail"
-  default = <db_name> #REPLACE
+  default = "gambia" #REPLACE
 }
 
 variable "db_username" {
   description = "RDS database user name"
-  default = <db_username> #REPLACE
+  default = "gambia" #REPLACE
 }
 
 #DO NOT fill in here. This will be asked at runtime
 variable "db_password" {}
 
 variable "public_key" {
-  default = <public_ssh_key>
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFIlJLzOK/C2d90vNJ3BIn6DXvT8VIgHA92x5wPgoeEt5mmBmMsIgjrLm0bZAFe0oHC+eQq6pZwiDqeiqQ7U4GG2pLZrTcECoWOLnoTEkK8z5aEgizwSczk/mgROML2EhxROlZljQ49mwXtrMIIhmkZazX9EocNY0bo0iP3FeuQK8IgJ4zaBNvAV59ZCg5N0EqSIAgWvAbRZsNmxMAYajxGEa9xbH73ioGkab+uEZzSGF2hl5mp7GChc91Q/OwJsuthb7eGiORvrCSuB2dSfn1MkTIAMg7sI7pFRghgbwiKu2wwHjOYDgZ//6csNycxT3CJFbX5mZIWqDDP2K4edre7OB/VGb0xw9j2ZjuCHMTGDelVKbYdzUzm0WtcU23POoJ+Sm6/mjIwuA/wUwAVZOZ8JDfTlIquCyo9BH/M1jfCBm7GvasPxzSJbMX4KiNqfEIzWfQl8G7ieYxjSjbbo2KbfD2dKeMZF7iaqpooe6Tx042FyX7k45fBq7ewGecOhjnmH86rRh+7cDnuHgLf0cZsYgwuHLAfLyPfiUrXdAECWnxAAyBCAPYQsfrWhO/czMF7rQRPP7sKW0j2VIWDx0weOrZjXmHKTv/X/JUvpbSgbm3z9hvvSEUuSqf3+MnXdQ8znb8BXwPv+RuNt3v+yyXIIyLcsVzPO7W4nLo9bMh8w=="
   description = "ssh key"
 }
 
